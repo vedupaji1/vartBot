@@ -145,7 +145,7 @@ const initBot = async () => {
         console.log(error);
     }
 }
-initBot();
+//initBot();
 
 http.listen(port, () => {
     console.log("Ok");
