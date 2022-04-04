@@ -37,16 +37,6 @@ let browser = null;
 let page = null;
 const devices = puppeteer.devices;
 const iPhonex = devices['iPhone X'];
-const chromeOptions = {
-    headless: true,
-    defaultViewport: null,
-    args: [
-        "--incognito",
-        "--no-sandbox",
-        "--single-process",
-        "--no-zygote"
-    ]
-};
 
 const sleepForTime = (time) => {
     return new Promise((res, rej) => {
@@ -117,9 +107,19 @@ app.get("/", async (req, res) => {
 
 const initBot = async () => {
     try {
+        const chromeOptions = {
+        headless: true,
+        defaultViewport: null,
+        args: [
+           "--incognito",
+           "--no-sandbox",
+           "--single-process",
+           "--no-zygote"
+        ]
+       };
         browser = await puppeteer.launch(chromeOptions);
         page = await browser.newPage();
-        await page.emulate(iPhonex);
+        //await page.emulate(iPhonex);
         await page.goto('https://www.instagram.com/accounts/login/');
 //         await page.waitForSelector("#loginForm > div > div:nth-child(3)");
 //         await page.type("[name=username]", "oneshreeram");
@@ -145,7 +145,7 @@ const initBot = async () => {
         console.log(error);
     }
 }
-//initBot();
+initBot();
 
 http.listen(port, () => {
     console.log("Ok");
