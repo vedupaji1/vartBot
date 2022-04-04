@@ -121,25 +121,25 @@ const initBot = async () => {
         page = await browser.newPage();
         await page.emulate(iPhonex);
         await page.goto('https://www.instagram.com/accounts/login/');
-        await page.waitForSelector("#loginForm > div > div:nth-child(3)");
-        await page.type("[name=username]", "oneshreeram");
-        await page.type("[name=password]", "8490856735v");
-        await sleepForTime(2000);
-        await page.keyboard.press("Enter");
-        await page.waitForSelector("#react-root > div > div:nth-child(3) > a._3m3RQ._7XMpj");
-        await sleepForTime(2000);
-        await page.click("#react-root > div > div:nth-child(3) > a._3m3RQ._7XMpj");
-        await page.waitForSelector("body > div.RnEpo.Yx5HN > div > div > div > div.mt3GC > button.aOOlW.HoLwm");
-        await sleepForTime(3000);
-        await page.click("body > div.RnEpo.Yx5HN > div > div > div > div.mt3GC > button.aOOlW.HoLwm");
-        page.setDefaultTimeout(30000);
-        await sleepForTime(500);
-        await page.mouse.wheel({
-            deltaY: 100
-        })
-        await page.waitForSelector("body > div.RnEpo.Yx5HN > div > div > div > div.mt3GC > button.aOOlW.HoLwm");
-        await sleepForTime(2000);
-        await page.click("body > div.RnEpo.Yx5HN > div > div > div > div.mt3GC > button.aOOlW.HoLwm");
+//         await page.waitForSelector("#loginForm > div > div:nth-child(3)");
+//         await page.type("[name=username]", "oneshreeram");
+//         await page.type("[name=password]", "8490856735v");
+//         await sleepForTime(2000);
+//         await page.keyboard.press("Enter");
+//         await page.waitForSelector("#react-root > div > div:nth-child(3) > a._3m3RQ._7XMpj");
+//         await sleepForTime(2000);
+//         await page.click("#react-root > div > div:nth-child(3) > a._3m3RQ._7XMpj");
+//         await page.waitForSelector("body > div.RnEpo.Yx5HN > div > div > div > div.mt3GC > button.aOOlW.HoLwm");
+//         await sleepForTime(3000);
+//         await page.click("body > div.RnEpo.Yx5HN > div > div > div > div.mt3GC > button.aOOlW.HoLwm");
+//         page.setDefaultTimeout(30000);
+//         await sleepForTime(500);
+//         await page.mouse.wheel({
+//             deltaY: 100
+//         })
+//         await page.waitForSelector("body > div.RnEpo.Yx5HN > div > div > div > div.mt3GC > button.aOOlW.HoLwm");
+//         await sleepForTime(2000);
+//         await page.click("body > div.RnEpo.Yx5HN > div > div > div > div.mt3GC > button.aOOlW.HoLwm");
         await page.close();
     } catch (error) {
         console.log(error);
