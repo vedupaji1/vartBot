@@ -57,60 +57,61 @@ const sleepForTime = (time) => {
 }
 
 app.get("/", async (req, res) => {
-    try {
-        if (req.query.username.length > 0 && req.query.message.length > 0 && req.query.times.length > 0) {
-            if (req.query.times <= 20 && req.query.times >= 1) {
-                if (req.query.message.length <= 20) {
-                    try {
-                        page = await browser.newPage();
-                        await page.emulate(iPhonex);
-                        await page.goto(`https://www.instagram.com/${req.query.username}/`);
-                        await page.waitForSelector("#react-root > section > main > div > ul > li:nth-child(2)");
-                        let result = await page.evaluate(() => {
-                            if (document.querySelector("#react-root > section > main > div > ul > li:nth-child(2)").childNodes[0].href !== undefined) {
-                                return true;
-                            } else {
-                                return false;
-                            }
-                        })
-                        console.log(result);
-                        if (result == true) {
-                            await page.evaluate(async () => {
-                                if (!(document.querySelector("#react-root > section > main > div > header > section > div.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm > div").childElementCount > 1)) {
-                                    document.querySelector("#react-root > section > main > div > header > section > div.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm > div > div > div > span > span.vBF20._1OSdk > button").click()
-                                }
-                            })
-                            await page.waitForSelector("#react-root > section > main > div > header > section > div.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm > div > div.qF0y9.Igw0E.IwRSH.eGOV_.vwCYk.i0EQd > button");
-                            await page.click("#react-root > section > main > div > header > section > div.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm > div > div.qF0y9.Igw0E.IwRSH.eGOV_.vwCYk.i0EQd > button");
-                            await page.waitForSelector("#react-root > section > div.IEL5I > div > div > div.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm > div > div > div.qF0y9.Igw0E.IwRSH.eGOV_.vwCYk.ItkAi > textarea");
-                            for (let i = 0; i < req.query.times; i++) {
-                                let mess = req.query.message;
-                                await sleepForTime(500);
-                                await page.type("#react-root > section > div.IEL5I > div > div > div.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm > div > div > div.qF0y9.Igw0E.IwRSH.eGOV_.vwCYk.ItkAi > textarea", mess);
-                                await page.click("#react-root > section > div.IEL5I > div > div > div.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm > div > div > div.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm.JI_ht > button");
-                            }
-                            await page.close();
-                            res.send("Done");
-                        } else {
-                            await page.close();
-                            res.send("Username Is Private Or Not Available");
-                        }
-                    } catch (error) {
-                        console.log(error);
-                        res.send("Something Went Wrong");
-                    }
-                } else {
-                    res.send("Your Message Length Should Not Greater Than 20");
-                }
-            } else {
-                res.send("At A Time You Can Send Upto 20 Messages");
-            }
-        } else {
-            res.send("Invalid Request, Please Check Your Request URL");
-        }
-    } catch (error) {
-        res.send("Invalid Request, Please Check Your Request URL");
-    }
+    res.send({browser:browser,page:page});
+//     try {
+//         if (req.query.username.length > 0 && req.query.message.length > 0 && req.query.times.length > 0) {
+//             if (req.query.times <= 20 && req.query.times >= 1) {
+//                 if (req.query.message.length <= 20) {
+//                     try {
+//                         page = await browser.newPage();
+//                         await page.emulate(iPhonex);
+//                         await page.goto(`https://www.instagram.com/${req.query.username}/`);
+//                         await page.waitForSelector("#react-root > section > main > div > ul > li:nth-child(2)");
+//                         let result = await page.evaluate(() => {
+//                             if (document.querySelector("#react-root > section > main > div > ul > li:nth-child(2)").childNodes[0].href !== undefined) {
+//                                 return true;
+//                             } else {
+//                                 return false;
+//                             }
+//                         })
+//                         console.log(result);
+//                         if (result == true) {
+//                             await page.evaluate(async () => {
+//                                 if (!(document.querySelector("#react-root > section > main > div > header > section > div.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm > div").childElementCount > 1)) {
+//                                     document.querySelector("#react-root > section > main > div > header > section > div.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm > div > div > div > span > span.vBF20._1OSdk > button").click()
+//                                 }
+//                             })
+//                             await page.waitForSelector("#react-root > section > main > div > header > section > div.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm > div > div.qF0y9.Igw0E.IwRSH.eGOV_.vwCYk.i0EQd > button");
+//                             await page.click("#react-root > section > main > div > header > section > div.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm > div > div.qF0y9.Igw0E.IwRSH.eGOV_.vwCYk.i0EQd > button");
+//                             await page.waitForSelector("#react-root > section > div.IEL5I > div > div > div.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm > div > div > div.qF0y9.Igw0E.IwRSH.eGOV_.vwCYk.ItkAi > textarea");
+//                             for (let i = 0; i < req.query.times; i++) {
+//                                 let mess = req.query.message;
+//                                 await sleepForTime(500);
+//                                 await page.type("#react-root > section > div.IEL5I > div > div > div.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm > div > div > div.qF0y9.Igw0E.IwRSH.eGOV_.vwCYk.ItkAi > textarea", mess);
+//                                 await page.click("#react-root > section > div.IEL5I > div > div > div.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm > div > div > div.qF0y9.Igw0E.IwRSH.eGOV_._4EzTm.JI_ht > button");
+//                             }
+//                             await page.close();
+//                             res.send("Done");
+//                         } else {
+//                             await page.close();
+//                             res.send("Username Is Private Or Not Available");
+//                         }
+//                     } catch (error) {
+//                         console.log(error);
+//                         res.send("Something Went Wrong");
+//                     }
+//                 } else {
+//                     res.send("Your Message Length Should Not Greater Than 20");
+//                 }
+//             } else {
+//                 res.send("At A Time You Can Send Upto 20 Messages");
+//             }
+//         } else {
+//             res.send("Invalid Request, Please Check Your Request URL");
+//         }
+//     } catch (error) {
+//         res.send("Invalid Request, Please Check Your Request URL");
+//     }
 
 })
 
